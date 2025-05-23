@@ -38,7 +38,7 @@ pipeline {
                  script{
                     withAWS(region: "${region}", credentials: "aws-creds") {
                         sh """
-                        
+                        export PATH=$PATH:/usr/local/bin
                         aws eks update-kubeconfig --region ${region} --name ${project}-${environment}-1
 						kubectl get nodes
                         cd helm
