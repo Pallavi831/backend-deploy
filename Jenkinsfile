@@ -36,7 +36,7 @@ pipeline {
         stage('Deploy') {
             steps {
                  script{
-                    withAWS(region: "${region}", credentials: "aws-creds-${environment}") {
+                    withAWS(region: "${region}", credentials: "aws-creds") {
                         sh """
                         
                         aws eks update-kubeconfig --region ${region} --name ${project}-${environment}-1
