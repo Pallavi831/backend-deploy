@@ -9,7 +9,7 @@ pipeline {
     }
 
     environment {
-        DEBUG = 'true'
+        // DEBUG = 'true'
         appVersion = '' // Global variable, set in first stage
         region = 'us-east-1'
         account_id = '557690626059'
@@ -34,9 +34,10 @@ pipeline {
         }
 
         stage('Deploy') {
-        steps {
-             withAWS(region: "${region}", credentials: 'aws-creds') {
-                sh """
+            steps {
+                 script{
+                    withAWS(region: "${region}", credentials: "aws-creds-${environment}") {
+                        sh """
                         
                         aws eks update-kubeconfig --region ${region} --name ${project}-${environment}-1
 						kubectl get nodes
@@ -44,7 +45,7 @@ pipeline {
                         sed -i 's/IMAGE_VERSION/${params.version}/g' values-${environment}.yaml
                         helm upgrade --install ${component} -n ${project} -f values-${environment}.yaml .
 
-                    """
+                        """
                     }
 
                 }
