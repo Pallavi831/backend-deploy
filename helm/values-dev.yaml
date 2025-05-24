@@ -2,6 +2,6 @@ configmap:
   db_host: expense-dev-1.cxqqqmqoye2w.us-east-1.rds.amazonaws.com
 deployment:
   imageURL: 557690626059.dkr.ecr.us-east-1.amazonaws.com/expense/dev/backend
-  # version: IMAGE_VERSION
-  version: 1.0.1
+  version: IMAGE_VERSION
+  # version: 1.0.1
   
